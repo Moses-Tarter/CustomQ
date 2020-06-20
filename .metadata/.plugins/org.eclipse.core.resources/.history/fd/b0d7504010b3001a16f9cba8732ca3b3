@@ -1,0 +1,32 @@
+package queue;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class Queue<E> {
+	
+	private Deque<E> master;
+	private Deque<E> slave;
+	
+	public Queue() {
+		master = new ArrayDeque<E>();
+		slave = new ArrayDeque<E>();
+	}
+	
+	public void add(E e) {
+		master.addFirst(e);
+	}
+	
+	public void remove(E e) {
+		if(slave.isEmpty()) {
+			switchStacks();
+			slave.removeFirst();
+		}
+		else
+			slave.removeFirst();
+	}
+	
+	public void switchStacks() {
+		master.forEach(n -> slave.addFirst(master.removeFirst()));
+	}
+}

@@ -1,0 +1,38 @@
+package queue;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class QueueCustomImp<E> {
+	
+	private Deque<E> master;
+	private Deque<E> slave;
+	
+	public QueueCustomImp() {
+		master = new ArrayDeque<E>();
+		slave = new ArrayDeque<E>();
+	}
+	
+	public void add(E e) {
+		master.addFirst(e);
+		System.out.println(e + " was added");
+	}
+	
+	public E pop() {
+		System.out.println("pop");
+		if(slave.isEmpty()) {
+			switchStacks();
+			if(!slave.isEmpty())
+				return slave.removeFirst();
+			else
+				return null;
+		}
+		else 
+			return slave.removeFirst();
+	}
+	
+	public void switchStacks() {
+		master.forEach(n -> slave.addFirst(master.removeFirst()));
+		System.out.println("stacks switch!");
+	}
+}

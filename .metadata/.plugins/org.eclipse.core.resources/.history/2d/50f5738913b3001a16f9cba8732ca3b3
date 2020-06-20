@@ -1,0 +1,12 @@
+package queue;
+
+public class Run {
+
+	public static void main(String[] args) {
+		QueueCustomImp<Integer> testQ = new QueueCustomImp<Integer>();
+		testQ.add(1);
+		System.out.println(testQ.pop());
+
+	}
+
+}
